@@ -1,8 +1,8 @@
 % Configuration package
 
-\newcommand{\PAPERWIDTH}{\iftoggle{inedition}{230mm}{210mm}}
-\newcommand{\MARGINRIGHT}{\iftoggle{inedition}{4.0cm}{2.0cm}}
-\setlength{\marginparwidth}{\iftoggle{inedition}{3.5cm}{2.0cm}}
+\newcommand{\PAPERWIDTH}{\iftoggle{inedition}{250mm}{210mm}}
+\newcommand{\MARGINRIGHT}{\iftoggle{inedition}{6.0cm}{2.0cm}}
+\setlength{\marginparwidth}{\iftoggle{inedition}{5.5cm}{2.0cm}}
 
 \usepackage[bottom=2.0cm,top=2.0cm,left=2.0cm,right=\MARGINRIGHT, papersize={\PAPERWIDTH, 297mm}]{geometry}
 
@@ -90,5 +90,13 @@
 \patchcmd{\footrule}{\hrule}{\color{black}\hrule}{}{} % footrule
 \makeatother
 
+% Command with different types of commentaries
+
+\newcommand{\DISABLETODONOTES}{\iftoggle{inedition}{}{disable}}
+
+\newcommandx{\change}[1]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red, \DISABLETODONOTES]{#1}}
+\newcommandx{\unsure}[1]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,\DISABLETODONOTES]{#1}}
+\newcommandx{\info}[1]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,\DISABLETODONOTES]{#1}}
+\newcommandx{\improvement}[1]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,\DISABLETODONOTES]{#1}}
 
 

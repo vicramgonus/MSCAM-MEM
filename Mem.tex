@@ -14,7 +14,7 @@
 
 % PACKAGES FOR LANGUAGE AND FONT
 \usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
+\usepackage[spanish, es-tabla]{babel} % Idioma 
 \usepackage[T1]{fontenc} % Font encoding
 
 % PACKAGES FOR IMAGES
@@ -43,8 +43,8 @@
 % PACKAGES FOR REFERENCES & BIBLIOGRAPHY
 \usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=black]{hyperref} % Adds clickable links at references
 \usepackage{cleveref}
-\usepackage[square, numbers, sort&compress]{natbib} % Square brackets, citing references with numbers, citations sorted by appearance in the text and compressed
-\bibliographystyle{plain} % You may use a different style adapted to your field
+\usepackage[square, numbers]{natbib} % Square brackets, citing references with numbers, citations sorted by appearance in the text and compressed
+\bibliographystyle{unsrt} % You may use a different style adapted to your field
 
 % PACKAGES FOR THE APPENDIX
 \usepackage{appendix}
@@ -81,15 +81,6 @@
 \newcommand{\e}[1]{\times 10^{#1}}  % Powers of 10 notation
 \newcommand{\mathbbm}[1]{\text{\usefont{U}{bbm}{m}{n}#1}} % From mathbbm.sty
 \newcommand{\pdev}[2]{\frac{\partial#1}{\partial#2}}
-
-% Command with different types of commentaries
-
-\newcommand{\DISABLETODONOTES}{\iftoggle{inedition}{}{disable}}
-
-\newcommandx{\unsure}[1]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red, \DISABLETODONOTES]{#1}}
-\newcommandx{\change}[1]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,\DISABLETODONOTES]{#1}}
-\newcommandx{\info}[1]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,\DISABLETODONOTES]{#1}}
-\newcommandx{\improvement}[1]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,\DISABLETODONOTES]{#1}}
 
 % Do not change Configuration_files/config.tex file unless you really know what you are doing. 
 % This file ends the configuration procedures (e.g. customizing commands, definition of new commands)
