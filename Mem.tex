@@ -1,10 +1,13 @@
-
-
 \documentclass[11pt,a4paper]{article} 
+
+
 
 %------------------------------------------------------------------------------
 %	REQUIRED PACKAGES AND  CONFIGURATIONS
 %------------------------------------------------------------------------------
+% Papersize, margins, etc.
+
+
 % PACKAGES FOR TITLES
 \usepackage{titlesec}
 \usepackage{color}
@@ -50,12 +53,24 @@
 \usepackage{enumitem}
 
 % OTHER PACKAGES
-\usepackage{amsthm,thmtools,xcolor} % Coloured "Theorem"
+\usepackage[pdftex,dvipsnames]{xcolor}  % Coloured text etc.
+\usepackage{amsthm,thmtools} % Coloured "Theorem"
 \usepackage{comment} % Comment part of code
 \usepackage{fancyhdr} % Fancy headers and footers
 \usepackage{lipsum} % Insert dummy text
 \usepackage{tcolorbox} % Create coloured boxes (e.g. the one for the key-words)
 \usepackage{comment} % Create comments
+\usepackage{fontawesome} % Use favicon symbols
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes} % Put TODO notes inside the text
+\usepackage{xargs} % Use more than one optional parameter in a new commands
+\usepackage{etoolbox}
+
+%-------------------------------------------------------------------------
+%	DOCUMENT MODE
+%-------------------------------------------------------------------------
+
+\providetoggle{inedition}
+\settoggle{inedition}{true} % document is in edition mode
 
 %-------------------------------------------------------------------------
 %	NEW COMMANDS DEFINED
@@ -66,17 +81,15 @@
 \newcommand{\e}[1]{\times 10^{#1}}  % Powers of 10 notation
 \newcommand{\mathbbm}[1]{\text{\usefont{U}{bbm}{m}{n}#1}} % From mathbbm.sty
 \newcommand{\pdev}[2]{\frac{\partial#1}{\partial#2}}
-% NB: you can also override some existing commands with the keyword \renewcommand
 
-%----------------------------------------------------------------------------
-%	ADD YOUR PACKAGES (be careful of package interaction)
-%----------------------------------------------------------------------------
+% Command with different types of commentaries
 
+\newcommand{\DISABLETODONOTES}{\iftoggle{inedition}{}{disable}}
 
-%----------------------------------------------------------------------------
-%	ADD YOUR DEFINITIONS AND COMMANDS (be careful of existing commands)
-%----------------------------------------------------------------------------
-
+\newcommandx{\unsure}[1]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red, \DISABLETODONOTES]{#1}}
+\newcommandx{\change}[1]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,\DISABLETODONOTES]{#1}}
+\newcommandx{\info}[1]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,\DISABLETODONOTES]{#1}}
+\newcommandx{\improvement}[1]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,\DISABLETODONOTES]{#1}}
 
 % Do not change Configuration_files/config.tex file unless you really know what you are doing. 
 % This file ends the configuration procedures (e.g. customizing commands, definition of new commands)
@@ -89,7 +102,7 @@
 \newcommand{\authors}{Gómez Rueda, José M.\\ Galindo Álvarez, Julián M.\\ Ramos González, Víctor.\\ Rodriguez Gallego, José A.}
 
 % -> Authors emails. Keep the previous order 
-\newcommand{\contacts}{\href{mailto:josemariagomezrueda@gmail.com}{josemariagomezrueda@gmail.com}\\\href{mailto:julian.g.a1996@gmail.com}{julian.g.a1996@gmail.com}\\\href{mailto:ramgonvictor@gmail.com}{ramgonvictor@gmail.com}\\ ...................@gmail.com}
+\newcommand{\contacts}{\href{mailto:josemariagomezrueda@gmail.com}{josemariagomezrueda@gmail.com}\\\href{mailto:julian.g.a1996@gmail.com}{julian.g.a1996@gmail.com}\\\href{mailto:ramgonvictor@gmail.com}{ramgonvictor@gmail.com}\\ \href{mailto:rodgal2020@gmail.com}{rodgal2020@gmail.com}}
 % -> advisor name and surname
 \newcommand{\advisor}{Sancho Caparrini, Fernando }
 % IF AND ONLY IF you need to modify the co-supervisors you also have to modify the file Configuration_files/title_page.tex (ONLY where it is marked)
@@ -99,7 +112,7 @@
 \newcommand{\YEAR}{2021-2022}
 
 % -> Resources (complement resources: documents, models, etc). Separated by \\
-\newcommand{\otherResources}{\href{https://github.com/julgalalv/chemotherapy-effects-SCAM}{@github:MSCAM}}
+\newcommand{\otherResources}{ \href{https://github.com/julgalalv/chemotherapy-effects-MSCAM}{\faGithub \, chemotherapy-effects-MSCAM}}
 
 % -> abstract (only in English)
 \renewcommand{\abstract}{En este trabajo se tratan de estudiar los efectos de la terapia en el desarrollo del cáncer avascular sobre la base de un modelo estocástico de autómatas celulares, presentando un modelo basado en la caracterización de tres procesos principales: crecimiento tumoral, acción inmunitaria  y acción farmacológica basada en quimioterapia. Más concretamente, el modelo presentado, MSCAM (\textit{Modified SCAM}), está basado en el modelo SCAM \cite{Pourhasanzade2019} incluyendo, a fin de que el modelo sea más compatible con el comportamiento biológico, un desglose de la actividad inmunitaria (innata y adquirida) junto con los procesos relacionados con ella (reconocimiento, respuesta inmune innata, activación de agentes inmunes específicos, respuesta inmune adquirida), así como la modelización de la respuesta farmacalógica contemplando tanto el factor de farmaco-resistencia (innata e inducida por los fármacos) así como el factor de repoblación tumoral. El trabajo abarca el estudio de distintos aspectos incluyendo análisis de la evolución tumoral e inmunitaria en ausencia quimioterapéutica, bajo la interrupción del tratamiento tras un solo ciclo de quimioterapia y bajo los modos de terapia de administración periódica de fármacos. La fracción de crecimiento, la fracción necrótica y el volumen tumoral se utilizan como marcadores de salida junto a una presentación gráfica de crecimiento en 2 dimensiones. Como validación de los resultados obtenidos se realiza una comparativa con los propuestos en el artículo de referencia \cite{Pourhasanzade2019}, basado en el contraste con datos bibliográficos de estudios in vivo.}
@@ -156,18 +169,18 @@
 %-----------------------------------------------------------------------------
 % CONCLUSION
 %-----------------------------------------------------------------------------
-\section{Resultados y discusión}
+\section{Conclusiones}
 \label{sec:conclusions}
 \input{material/conclusions.tex}
 
-\section{Bibliography and citations}
+
 
 
 
 %-----------------------------------------------------------------------------
 % BIBLIOGRAPHY
 %-----------------------------------------------------------------------------
-
+%\section{Referencias}
 \bibliography{bibliography.bib}
 
 %-----------------------------------------------------------------------------

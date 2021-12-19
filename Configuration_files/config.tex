@@ -1,6 +1,10 @@
 % Configuration package
-\usepackage[bottom=2.0cm,top=2.0cm,left=2.0cm,right=2.0cm]{geometry}
-\raggedbottom 
+
+\newcommand{\PAPERWIDTH}{\iftoggle{inedition}{230mm}{210mm}}
+\newcommand{\MARGINRIGHT}{\iftoggle{inedition}{4.0cm}{2.0cm}}
+\setlength{\marginparwidth}{\iftoggle{inedition}{3.5cm}{2.0cm}}
+
+\usepackage[bottom=2.0cm,top=2.0cm,left=2.0cm,right=\MARGINRIGHT, papersize={\PAPERWIDTH, 297mm}]{geometry}
 
 % Create color bluePoli (-> manuale grafica coordinata:  https://www.polimi.it/fileadmin/user_upload/il_Politecnico/grafica-coordinata/2015_05_11_46xy_manuale_grafica_coordinata.pdf)
 \definecolor{bluePoli}{RGB}{165 50 62}
@@ -85,3 +89,6 @@
 \patchcmd{\headrule}{\hrule}{\color{black}\hrule}{}{} % headrule
 \patchcmd{\footrule}{\hrule}{\color{black}\hrule}{}{} % footrule
 \makeatother
+
+
+
