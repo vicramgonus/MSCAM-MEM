@@ -1,0 +1,43 @@
+\subsubsection{Fundamentos biológicos}
+
+\info{INTRO SOBRE DIFERENTES PROCEDIMIENTOS, BASADA EN \cite{Abou-Jawde2003}}
+
+La quimioterapia es el principal tratamiento de las enfermedades tumorales, afectando al crecimiento del tumor y destruyendo células tumorales \cite{Honore2015, Miller2019, Capozzi2020}.
+
+En la eficacia de la quimioterapia intervienen distintos factores: estadio de inicio del tratamiento ($t_{ap}$), nº ciclos ($n_d$"), periodo entre dosis $t_{per}$, tiempo de acción de las dosis ($\tau$) y, además, suele verse atenuada por farmacorresistencia tumoral (intrínseca/inducida) dando lugar a células \textit{stem/non-stem}, repoblación tumoral
+(división simétrica/asimétrica) \cite{Birkhead1987, Marcu2005, Marcu2012}. 
+
+Existen tratamientos quimioterapéuticos dirigidos que afectan considerablemente más a células tumorales que a células sanas y palian la inmunosupresión \cite{Sun2016}. \todo{Ampliar recurriendo a \cite{Abou-Jawde2003} también.}
+
+
+
+
+\subsubsection{Modelización de la acción farmacológica en MSCAM}
+
+\begin{itemize}
+    
+    \item Cuestiones generales.\\
+    \begin{itemize}
+        \item Se consideran dos tipos de células tumorales (DRC y DSC), proliferación simétrica/asimétrica, así como distintas tasas de muerte por grupos ante la quimiterapia.
+    \end{itemize}
+
+    \item Parámetros principales.\\ 
+    \begin{itemize}
+        \item $t_{ap}$
+        \item $n_d$
+        \item $t_{per}$
+        \item $\tau$
+    \end{itemize}
+    
+    \item Efecto de la quimioterapia sobre la evolución del tumor.\\ 
+    \begin{itemize}
+        \item Inducción de muerte celular, salvo para las $DRCs$. Se considera \todo{completar} probabilidad de muerte... 
+        \change{V: Utiliza mejor el entorno equation, porfa}
+        $$p^i_D(t) = \gamma_i'·k_i·e^{-c_i(t-t_n)}; t_a + (n-1) t_{per} = t_n \leq t \leq t_{n+1} = t_n + \tau$$
+        Adicionalmente, se considera la siguiente evolución, que modela el factor de resistencia adquirida:
+        $$\gamma_i' = \gamma_i·\theta, (\theta \sim \mathcal{U}(0.90, 1))$$
+        \item Disminución de la probabilidad de proliferación, con la siguiente expresión:
+        $$\rho_0' = \rho_0·e^{c_{PC}(t-(t_n+\tau))}$$
+    \end{itemize}
+    
+\end{itemize}

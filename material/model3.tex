@@ -40,17 +40,17 @@ Los estados \textit{NK} y \textit{CTL} representan a los agentes del sistema inm
 \info{V - El valor de $\upsilon_{NK}$ es habitualmente tomado en la literatura como 0.1} \info{V - En la implementación, en realidad conviene comprobar de antemano si $|\textit{c with state=NK}|$ es mayor que el umbral, de forma que si lo es no se añada ninguna}
 
 
-\item Dichas células realizan caminos aleatorios guiadas probabilísticamente por la señal de antígenos. Cuando estas células entran en contacto con una célula tumoral, se dan dos procesos.  Por una parte, intentan lisarla. El destino de esta célula tumoral depende de la capacidad citotóxica intrínseca de las células inmunitarias, más concretamente la probabilidad de que una célula tumoral desaparezca a causa de una acción de una célula inmune corresponde a: 
+\item Dichas células realizan caminos aleatorios guiadas probabilísticamente por la señal de antígenos. Cuando estas células entran en contacto con una célula tumoral, se dan dos procesos.  Por una parte, intentan destruirla. El destino de esta célula tumoral depende de la capacidad citotóxica intrínseca de las células inmunitarias así como de la resistencia adquirida por las células tumorales y el daño sufrido por estas, más concretamente la probabilidad de que una célula tumoral desaparezca a causa de una acción de una célula inmune corresponde a: 
 
 \begin{equation}
-    P_{lys}(c_t, c_i) = \max \left\lbrace 0, 1 - \exp{\left(- (\mathcal{R}(c_t) - \mathcal{D}(c_t) - \mathcal{T}(c_i)) \right)} \right\rbrace
+    P_{lys}(c_t, c_i) = \min \left\lbrace 1, 2 - \exp{\left(0.69 \cdot (\mathcal{R}(c_t) - \mathcal{D}(c_t) - \mathcal{T}(c_i)) \right)} \right\rbrace
 \end{equation}
 
-$\mathcal{R}$ representa la resistencia de las células tumorales ante la acción de las células inmunes. Este parámetro nos permite modelar la resistencia intrínseca de las células (distinta para TC y QC) así como la adquirida por las propias células tumorales. $\mathcal{D}$ representa el daño sufrido por una célula tumoral a causa de la acción inmune y $\mathcal{T}$ la capacidad citotóxica de las distintas células inmunes. Este último, nos permite representar la diferente efectividad de las células innatas (\textit{NK}) y las adaptativas (\textit{CTL}) así como los microentornos tumorales inmunodeprimidos.\\
+$\mathcal{R}$ representa la resistencia de las células tumorales ante la acción de las células inmunes. Este parámetro nos permite modelar la resistencia intrínseca de las células así como la adquirida por las propias células tumorales. $\mathcal{D}$ representa el daño sufrido por una célula tumoral a causa de la acción inmune y $\mathcal{T}$ la capacidad citotóxica de las distintas células inmunes. Este último, nos permite representar la diferente efectividad de las células innatas (\textit{NK}) y las adaptativas (\textit{CTL}) así como los microentornos tumorales inmunodeprimidos.\\
 
-\item Cuando una célula tumoral muere a causa de la acción inmune, dicha célula pasa a un estado inestable, pudiéndose regenerar (reparación tisular) si posee a su alrededor 5 o más células sanas.\\
+\item Cuando una célula tumoral muere a causa de la acción inmune, dicha célula pasa a un estado inestable, y muere tras un cierto número de pasos, pudiéndose regenerar (reparación tisular) si posee a su alrededor 5 o más células sanas.\\
 
-\item En caso contrario (la célula tumoral resiste entonces sufre cierto daño debido al conflicto \textit{I vs T}, pero también adquiere cierto incremento en su resistencia al sistema inmune. La resistencia se propaga en el proceso de proliferación tumoral, mientras que el daño es restablecido a $0$ cada vez que la célula es reemplazada en el proceso de proliferación.\\  
+\item En caso contrario (la célula tumoral resiste), entonces sufre cierto daño debido al conflicto \textit{IC vs TC}, pero también adquiere cierto incremento en su resistencia al sistema inmune. La resistencia se propaga en el proceso de proliferación tumoral, mientras que el daño es restablecido a $0$ cada vez que la célula es reemplazada en el proceso de proliferación.\\  
 
 
 \item Como parte del proceso de reclutación, cuando una célula inmune (\textit{NK} o \textit{CTL}) destruye una célula tumoral, se explora cada celda no tumoral que la rodea, que pasa a ser una célula inmune del mismo tipo con probabilidad: 
@@ -61,7 +61,7 @@ $\mathcal{R}$ representa la resistencia de las células tumorales ante la acció
 
 Donde $\xi$ representa el factor de reclutamiento. De manera que, cuanto mayor sea el factor de reclutamiento y el número de células cancerosas a su alrededor, mayor será el número de células reclutadas. Nótese además que la reclutación de una \textit{CTL} puede sustituir a una $NK$ pero no al revés.\\
 
-\item Adicionalmente, en el proceso de respuesta del sistema innato y la activación del sistema inmune, tras cualquier conflicto \textit{T vs NK} la célula $NK$ desaparece, cambiando de estado a una celda $CTL$ que permanecerá inactiva durante cierto tiempo. \unsure{V - Aquí he de mirar la bibliografía a ver cuánto tarda en comenzar la respuesta inmune, para poder determinar el número de pasos (en base a las 5h por paso).}\\
+\item Adicionalmente, en el proceso de respuesta del sistema innato y la activación del sistema inmune, tras cualquier conflicto \textit{TC vs NK} la célula $NK$ desaparece, cambiando de estado a una celda $CTL$ que permanecerá inactiva durante cierto tiempo hasta que el sistema adaptativo se considere activo. \unsure{V - Aquí he de mirar la bibliografía a ver cuánto tarda en comenzar la respuesta inmune, para poder determinar el número de pasos (en base a las 5h por paso).}\\
 
 \item A diferencia de las $NK$, las células $CTL$ pueden ejecutar varios ataques (secuenciales) contra las células tumorales. Además al igual, que las células $NK$, los agentes inmunológicos mueren al cabo del tiempo. La probabilidad de que una célula inmune desaparezca, dando lugar a una célula sana, viene dada por:
 

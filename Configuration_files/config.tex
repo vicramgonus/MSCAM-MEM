@@ -48,14 +48,14 @@
 \setlist[itemize,3]{label=$-$}
 \setlist{nosep}
 
-% Create command for background pic
-\newcommand\BackgroundPic{% Adding background picture
-	\put(237,365){
-	    \parbox[b][\paperheight]{\paperwidth}{%
+% Adding background picture
+\newcommand\BackgroundPic{
+	\put(393,322){
+	    \parbox[b][\paperheight]{70mm}{%
 	    \vfill
 		\centering
 		\transparent{0.4}
-		\includegraphics[width=0.44\paperwidth]{raggiera_polimi.eps}%
+		\includegraphics[width=70mm]{raggiera_polimi.eps}%
 		\vfill}
 		}
 }
@@ -94,7 +94,8 @@
 
 \newcommand{\DISABLETODONOTES}{\iftoggle{inedition}{}{disable}}
 
-\newcommandx{\change}[1]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red, \DISABLETODONOTES]{#1}}
+\newcommandx{\error}[1]{\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red, \DISABLETODONOTES]{#1}}
+\newcommandx{\change}[1]{\todo[linecolor=yellow,backgroundcolor=yellow!25,bordercolor=yellow, \DISABLETODONOTES]{#1}}
 \newcommandx{\unsure}[1]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,\DISABLETODONOTES]{#1}}
 \newcommandx{\info}[1]{\todo[linecolor=OliveGreen,backgroundcolor=OliveGreen!25,bordercolor=OliveGreen,\DISABLETODONOTES]{#1}}
 \newcommandx{\improvement}[1]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,\DISABLETODONOTES]{#1}}
